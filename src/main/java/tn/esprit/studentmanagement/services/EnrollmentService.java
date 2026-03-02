@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EnrollmentService implements IEnrollmentService {
+public class EnrollmentService implements IEnrollment {
 
     @Autowired
     private EnrollmentRepository enrollmentRepository;
