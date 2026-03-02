@@ -20,8 +20,9 @@ public class DepartmentService implements IDepartmentService {
 
     @Override
     public Department getDepartmentById(Long idDepartment) {
-        return departmentRepository.findById(idDepartment);
-    }
+    return departmentRepository.findById(idDepartment)
+                               .orElseThrow(() -> new DepartmentNotFoundException("Department not found for ID: " + idDepartment));
+}
 
     @Override
     public Department saveDepartment(Department department) {
