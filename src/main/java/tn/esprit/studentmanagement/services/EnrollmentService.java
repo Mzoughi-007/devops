@@ -1,7 +1,7 @@
 package tn.esprit.studentmanagement.services;
 
 import tn.esprit.studentmanagement.entities.Enrollment;
-import tn.esprit.studentmanagement.exceptions.EnrollmentNotFoundException;  // Correct import statement
+import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -31,5 +31,12 @@ public class EnrollmentService implements IEnrollmentService {
     @Override
     public void deleteEnrollment(Long id) {
         enrollmentRepository.deleteById(id);
+    }
+
+    public Department getDepartmentById(Long id) {
+        // Your code logic
+        if (department == null) {
+            throw new EntityNotFoundException("Department not found for ID: " + id);
+        }
     }
 }
