@@ -33,7 +33,7 @@ pipeline {
     steps {
         sh "mvn sonar:sonar \
             -Dsonar.login=9211a7a22b3629089649968983455ef7af24695b \
-            -Dsonar.host.url=http://192.168.204.130:9000 \
+            -Dsonar.host.url=http://192.168.72.130:9000 \
             -Dsonar.qualitygate.wait=false \
             -Dsonar.tests=" 
     }
