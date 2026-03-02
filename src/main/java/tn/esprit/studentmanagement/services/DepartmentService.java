@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.studentmanagement.entities.Department;
 import tn.esprit.studentmanagement.repositories.DepartmentRepository;
+package tn.esprit.studentmanagement.exceptions;
 
 import java.util.List;
 
@@ -33,4 +34,10 @@ public class DepartmentService implements IDepartmentService {
     public void deleteDepartment(Long idDepartment) {
 departmentRepository.deleteById(idDepartment);
     }
+
+    public class DepartmentNotFoundException extends RuntimeException {
+    public DepartmentNotFoundException(String message) {
+        super(message);
+    }
+}
 }
