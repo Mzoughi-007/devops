@@ -1,18 +1,16 @@
 package tn.esprit.studentmanagement.services;
 
+import tn.esprit.studentmanagement.entities.Department;
+import tn.esprit.studentmanagement.exceptions.DepartmentNotFoundException;  // Correct import statement
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.esprit.studentmanagement.entities.Department;
-import tn.esprit.studentmanagement.repositories.DepartmentRepository;
-package tn.esprit.studentmanagement.exceptions;
-
 import java.util.List;
 
 @Service
-
 public class DepartmentService implements IDepartmentService {
+
     @Autowired
-    DepartmentRepository departmentRepository;
+    private DepartmentRepository departmentRepository;
 
     @Override
     public List<Department> getAllDepartments() {
@@ -20,10 +18,10 @@ public class DepartmentService implements IDepartmentService {
     }
 
     @Override
-    public Department getDepartmentById(Long idDepartment) {
-    return departmentRepository.findById(idDepartment)
-                               .orElseThrow(() -> new DepartmentNotFoundException("Department not found for ID: " + idDepartment));
-}
+    public Department getDepartmentById(Long id) {
+        return departmentRepository.findById(id).orElseThrow(() -> 
+            new DepartmentNotFoundException("Department with id " + id + " not found"));
+    }
 
     @Override
     public Department saveDepartment(Department department) {
@@ -31,13 +29,7 @@ public class DepartmentService implements IDepartmentService {
     }
 
     @Override
-    public void deleteDepartment(Long idDepartment) {
-departmentRepository.deleteById(idDepartment);
+    public void deleteDepartment(Long id) {
+        departmentRepository.deleteById(id);
     }
-
-    public class DepartmentNotFoundException extends RuntimeException {
-    public DepartmentNotFoundException(String message) {
-        super(message);
-    }
-}
 }
