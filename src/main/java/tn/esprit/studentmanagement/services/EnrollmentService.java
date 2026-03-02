@@ -33,10 +33,10 @@ public class EnrollmentService implements IEnrollmentService {
         enrollmentRepository.deleteById(id);
     }
 
-    public Department getDepartmentById(Long id) {
+    public Enrollment getEnrollmentById(Long id) {
         // Your code logic
-        if (department == null) {
-            throw new EntityNotFoundException("Department not found for ID: " + id);
+        if (enrollment == null) {
+            throw new EntityNotFoundException("Enrollment not found for ID: " + id);
         }
     }
 }
