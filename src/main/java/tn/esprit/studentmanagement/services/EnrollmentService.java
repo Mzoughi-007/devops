@@ -17,11 +17,7 @@ public class EnrollmentService implements IEnrollmentService {
         return enrollmentRepository.findAll();
     }
 
-    @Override
-    public Enrollment getEnrollmentById(Long id) {
-        return enrollmentRepository.findById(id).orElseThrow(() -> 
-            new EnrollmentNotFoundException("Enrollment with id " + id + " not found"));
-    }
+    
 
     @Override
     public Enrollment saveEnrollment(Enrollment enrollment) {
@@ -33,6 +29,7 @@ public class EnrollmentService implements IEnrollmentService {
         enrollmentRepository.deleteById(id);
     }
 
+    @Override
     public Enrollment getEnrollmentById(Long id) {
         // Your code logic
         if (enrollment == null) {
