@@ -27,11 +27,16 @@ pipeline {
                 sh 'mvn compile'
             }
         }
+        
 
         stage('MVN SONARQUBE') {
-            steps {
-                sh 'mvn sonar:sonar -Dsonar.login=b679d607f3465457abfbaac0ab481c3cd644b171'
-            }
-        }
+    steps {
+        sh "mvn sonar:sonar \
+            -Dsonar.login=9211a7a22b3629089649968983455ef7af24695b \
+            -Dsonar.host.url=http://192.168.204.130:9000 \
+            -Dsonar.qualitygate.wait=false \
+            -Dsonar.tests=" 
+    }
+}
     }
 }
