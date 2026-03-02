@@ -18,8 +18,9 @@ public class EnrollmentService implements IEnrollment {
 
     @Override
     public Enrollment getEnrollmentById(Long idEnrollment) {
-        return enrollmentRepository.findById(idEnrollment);
-    }
+    return enrollmentRepository.findById(idEnrollment)
+                               .orElseThrow(() -> new EnrollmentNotFoundException("Enrollment not found for ID: " + idEnrollment));
+}
 
     @Override
     public Enrollment saveEnrollment(Enrollment enrollment) {
