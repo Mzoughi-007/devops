@@ -1,16 +1,16 @@
 package tn.esprit.studentmanagement.services;
 
+import tn.esprit.studentmanagement.entities.Enrollment;
+import tn.esprit.studentmanagement.exceptions.EnrollmentNotFoundException;  // Correct import statement
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.esprit.studentmanagement.repositories.EnrollmentRepository;
-import tn.esprit.studentmanagement.entities.Enrollment;
 import java.util.List;
-package tn.esprit.studentmanagement.exceptions;
 
 @Service
-public class EnrollmentService implements IEnrollment {
+public class EnrollmentService implements IEnrollmentService {
+
     @Autowired
-    EnrollmentRepository enrollmentRepository;
+    private EnrollmentRepository enrollmentRepository;
 
     @Override
     public List<Enrollment> getAllEnrollments() {
@@ -18,27 +18,18 @@ public class EnrollmentService implements IEnrollment {
     }
 
     @Override
-    public Enrollment getEnrollmentById(Long idEnrollment) {
-    return enrollmentRepository.findById(idEnrollment)
-                               .orElseThrow(() -> new EnrollmentNotFoundException("Enrollment not found for ID: " + idEnrollment));
-}
+    public Enrollment getEnrollmentById(Long id) {
+        return enrollmentRepository.findById(id).orElseThrow(() -> 
+            new EnrollmentNotFoundException("Enrollment with id " + id + " not found"));
+    }
 
     @Override
     public Enrollment saveEnrollment(Enrollment enrollment) {
         return enrollmentRepository.save(enrollment);
     }
 
-
-
-public class EnrollmentNotFoundException extends RuntimeException {
-    public EnrollmentNotFoundException(String message) {
-        super(message);
-    }
-}
-    
-
     @Override
-    public void deleteEnrollment(Long idEnrollment) {
-enrollmentRepository.deleteById(idEnrollment);
+    public void deleteEnrollment(Long id) {
+        enrollmentRepository.deleteById(id);
     }
 }
