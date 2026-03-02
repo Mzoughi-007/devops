@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import tn.esprit.studentmanagement.repositories.EnrollmentRepository;
 import tn.esprit.studentmanagement.entities.Enrollment;
 import java.util.List;
+package tn.esprit.studentmanagement.exceptions;
 
 @Service
 public class EnrollmentService implements IEnrollment {
@@ -26,6 +27,15 @@ public class EnrollmentService implements IEnrollment {
     public Enrollment saveEnrollment(Enrollment enrollment) {
         return enrollmentRepository.save(enrollment);
     }
+
+
+
+public class DepartmentNotFoundException extends RuntimeException {
+    public DepartmentNotFoundException(String message) {
+        super(message);
+    }
+}
+    
 
     @Override
     public void deleteEnrollment(Long idEnrollment) {
