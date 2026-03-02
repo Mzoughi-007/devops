@@ -32,7 +32,7 @@ pipeline {
         stage('MVN SONARQUBE') {
     steps {
         sh "mvn sonar:sonar \
-            -Dsonar.login=9211a7a22b3629089649968983455ef7af24695b \
+            -Dsonar.login=f15e2274833cd0dd6c38eff10628e23b4287f001 \
             -Dsonar.host.url=http://192.168.72.130:9000 \
             -Dsonar.qualitygate.wait=false \
             -Dsonar.tests=" 
