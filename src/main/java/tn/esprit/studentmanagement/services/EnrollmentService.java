@@ -30,8 +30,8 @@ public class EnrollmentService implements IEnrollment {
 
 
 
-public class DepartmentNotFoundException extends RuntimeException {
-    public DepartmentNotFoundException(String message) {
+public class EnrollmentNotFoundException extends RuntimeException {
+    public EnrollmentNotFoundException(String message) {
         super(message);
     }
 }
