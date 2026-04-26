@@ -1,42 +1,52 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'MAVEN_HOME'
+    }
+
+    environment {
+        SONAR_TOKEN = credentials('sonar-token') // Jenkins credentials ID
+    }
+
     stages {
+
         stage('Checkout GIT') {
             steps {
-                echo 'Pulling...'
                 git branch: 'master',
                     url: 'https://github.com/Mzoughi-007/devops.git'
             }
         }
 
-        stage('Testing Maven') {
-            steps {
-                sh 'mvn -version'
-            }
-        }
-
-        stage('MVN CLEAN') {
+        stage('Clean Build') {
             steps {
                 sh 'mvn clean'
             }
         }
 
-        stage('MVN COMPILE') {
+        stage('Compile') {
             steps {
                 sh 'mvn compile'
             }
         }
-        
 
-        stage('MVN SONARQUBE') {
-    steps {
-        sh "mvn sonar:sonar \
-            -Dsonar.login=f15e2274833cd0dd6c38eff10628e23b4287f001 \
-            -Dsonar.host.url=http://192.168.72.130:9000 \
-            -Dsonar.qualitygate.wait=false \
-            -Dsonar.tests=" 
-    }
-}
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('sonarqube') {
+                    sh """
+                    mvn sonar:sonar \
+                    -Dsonar.projectKey=devops \
+                    -Dsonar.host.url=http://192.168.72.130:9000 \
+                    -Dsonar.login=${SONAR_TOKEN}
+                    """
+                }
+            }
+        }
     }
 }
