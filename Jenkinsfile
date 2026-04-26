@@ -5,10 +5,6 @@ pipeline {
         maven 'MAVEN_HOME'
     }
 
-    environment {
-        SONAR_TOKEN = credentials('sonar-token') // Jenkins credentials ID
-    }
-
     stages {
 
         stage('Checkout GIT') {
@@ -39,12 +35,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonarqube') {
-                    sh """
-                    mvn sonar:sonar \
-                    -Dsonar.projectKey=devops \
-                    -Dsonar.host.url=http://192.168.72.140:9000 \
-                    -Dsonar.login=${SONAR_TOKEN}
-                    """
+                    sh 'mvn sonar:sonar -Dsonar.projectKey=devops'
                 }
             }
         }
